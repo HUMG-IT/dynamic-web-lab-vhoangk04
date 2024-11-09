@@ -31,7 +31,7 @@ app.post('/api/v1/bmi', (req, res) => {
   const classification = classifyBMI(bmi);
   res.json({ bmi, classification });
 });
-
+// BMI
 describe('Kiểm thử POST /api/v1/bmi', () => {
   it('tính chỉ số BMI và trả về phân loại "Bình thường" cho cân nặng 60kg và chiều cao 165cm', async () => {
     const res = await request(app)
@@ -39,7 +39,7 @@ describe('Kiểm thử POST /api/v1/bmi', () => {
       .send({ weight: 60, height: 165 });
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('bmi');
-    expect(res.body).toHaveProperty('classification', 'Bình thường');
+    expect(res.body.classification).toBe('Bình thường'); // Kỳ vọng là 'Bình thường'
   });
 
   it('phân loại là "Gầy" cho BMI thấp', async () => {
@@ -47,7 +47,7 @@ describe('Kiểm thử POST /api/v1/bmi', () => {
       .post('/api/v1/bmi')
       .send({ weight: 45, height: 165 });
     expect(res.statusCode).toEqual(200);
-    expect(res.body.classification).toBe('Gầy');
+    expect(res.body.classification).toBe('Gầy'); // Kỳ vọng là 'Gầy'
   });
 
   it('phân loại là "Thừa cân" cho BMI cao hơn', async () => {
@@ -55,7 +55,7 @@ describe('Kiểm thử POST /api/v1/bmi', () => {
       .post('/api/v1/bmi')
       .send({ weight: 75, height: 165 });
     expect(res.statusCode).toEqual(200);
-    expect(res.body.classification).toBe('Thừa cân');
+    expect(res.body.classification).toBe('Thừa cân'); // Kỳ vọng là 'Thừa cân'
   });
 
   it('phân loại là "Béo phì" cho BMI rất cao', async () => {
@@ -63,6 +63,7 @@ describe('Kiểm thử POST /api/v1/bmi', () => {
       .post('/api/v1/bmi')
       .send({ weight: 90, height: 165 });
     expect(res.statusCode).toEqual(200);
-    expect(res.body.classification).toBe('Béo phì');
+    expect(res.body.classification).toBe('Béo phì'); // Kỳ vọng là 'Béo phì'
   });
 });
+
