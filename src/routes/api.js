@@ -9,6 +9,7 @@
 const express = require('express');
 const router = express.Router();
 const { submitName } = require('../controllers/nameController');
+const { calculateBMI } = require('../controllers/bmiController');
 // TODO: Import hàm `getBMI` từ `bmiController` để xử lý yêu cầu tính chỉ số BMI
 
 /**
@@ -22,6 +23,7 @@ const { submitName } = require('../controllers/nameController');
  * @returns {Object} JSON - Trả về thông điệp chào và danh sách tên.
  */
 router.post('/submit', submitName);
+router.post('/bmi', calculateBMI);
 
 /**
  * Route cho endpoint `/bmi`
